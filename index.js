@@ -44,7 +44,7 @@ export = ${fileName};
 export as namespace ${fileName};
 `;
 
-		fs.writeFileSync(path.join(dirPath, i[1]), data);
+		fs.writeFileSync(path.join(dirPath, i[1].replace(/\.js$/, '.d.ts')), data);
 
 	}
 }
