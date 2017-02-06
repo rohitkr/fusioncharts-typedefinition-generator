@@ -36,12 +36,13 @@ for (i of res) {
 
 	    createDir(dirPath);
 
-		var data = `interface FusionCharts {
-}
+		var data = `
+import { FusionChartStatic } from "fusioncharts";
 
-declare var ${fileName}: (H: FusionCharts) => FusionCharts;
+declare var ${fileName}: (H: FusionChartStatic) => FusionChartStatic;
 export = ${fileName};
 export as namespace ${fileName};
+
 `;
 
 		fs.writeFileSync(path.join(dirPath, i[1].replace(/\.js$/, '.d.ts')), data);
