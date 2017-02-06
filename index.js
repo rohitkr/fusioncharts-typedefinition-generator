@@ -1,6 +1,7 @@
 var fs = require('fs'),
+	// fsextra = require('fs-extra')
 	path = require('path'),
-	SOURCE_PATH = process.argv && process.argv[2] || './node_modules/fusionmaps',
+	SOURCE_PATH = process.argv && process.argv[2] || './node_modules/fusioncharts',
 	OUT_DIR = process.argv && process.argv[3] || './types/';
 
 var walk = function(dir) {
@@ -30,10 +31,11 @@ var createDir = (dirPath) => {
 res = walk(SOURCE_PATH);
 
 for (i of res) {
-	if (/^fusioncharts/.test(i[1])) {
+	if (/^fusioncharts/.test(i[1]) && !/^fusioncharts\.js/.test(i[1])) {
 		var fileName = i[1].replace(/^fusioncharts\.(.*)\.js/, '$1').replace(/^theme\./, ''),
 		    dirPath = path.join(OUT_DIR, i[0].replace(/(.*)node_modules/, '')).replace(/fusioncharts\.(.*)/, '');
 
+		console.log('✓ ', i[1]);
 	    createDir(dirPath);
 
 		var data = `
