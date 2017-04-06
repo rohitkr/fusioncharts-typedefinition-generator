@@ -5,6 +5,7 @@ var fs = require('fs'),
 	TYPE_DEFINITION = `
 import { FusionChartStatic } from "fusioncharts";
 
+declare namespace __MOD_NAME__ {}
 declare var __MOD_NAME__: (H: FusionChartStatic) => FusionChartStatic;
 export = __MOD_NAME__;
 export as namespace __MOD_NAME__;
@@ -45,7 +46,7 @@ for (i of res) {
 		console.log('✓ ', i[1]);
 	    createDir(dirPath);
 
-	    data = TYPE_DEFINITION.replace(/__MOD_NAME__/g, fileName);
+	    data = TYPE_DEFINITION.replace(/__MOD_NAME__/g, fileName.replace(/(.)(.*)/, function (word, match1, match2) {  return match1.toUpperCase() + match2.toLowerCase()  }));
 
 	    // Main file should be index.d.ts instead of fusioncharts.js
 		if (!/^fusioncharts\.js/.test(i[1])) {
